@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
+import { NavigationMenu, NavigationMenuList } from "../ui/navigation-menu";
 import logoImg from "../../assets/logo-img.png";
-import {
-  NavigationMenu,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "../ui/navigation-menu";
 
 function Logo() {
   return (
@@ -18,20 +14,16 @@ function Logo() {
 function LoggedOutNav() {
   return (
     <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuLink>
-          <Link to="/register" className="font-bold text-base">
-            Register
-          </Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink>
-          <Link
-            to="/login"
-            className="font-bold text-base bg-blue-600 text-white px-4 py-2 rounded-md"
-          >
-            Login
-          </Link>
-        </NavigationMenuLink>
+      <NavigationMenuList className="flex gap-5">
+        <Link to="/register" className="font-bold text-base">
+          Register
+        </Link>
+        <Link
+          to="/login"
+          className="font-bold text-base bg-blue-600 text-white px-4 py-2 rounded-md"
+        >
+          Login
+        </Link>
       </NavigationMenuList>
     </NavigationMenu>
   );
