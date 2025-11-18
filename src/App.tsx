@@ -1,8 +1,10 @@
-import Header from "./components/layout/Header";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { Route, Routes } from "react-router-dom";
+import AllTasks from "./pages/AllTasks";
+import Protected from "./components/Protected";
 function App() {
   return (
     <div className="p-1">
@@ -11,6 +13,14 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/tasks"
+          element={
+            <Protected>
+              <AllTasks />
+            </Protected>
+          }
+        />
       </Routes>
     </div>
   );

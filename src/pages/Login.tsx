@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import useUser from "@/store/user";
 
 function Login() {
   const { setUser } = useUser();
+  const navigate = useNavigate();
   function handleLogin() {
     setUser({
       firstName: "John",
@@ -13,9 +14,10 @@ function Login() {
       username: "john",
       emailAddress: "jd@gmail.com",
     });
+    navigate("/tasks");
   }
   return (
-    <div className="w-full min-h-screen flex items-center justify-center px-4 py-10">
+    <div className="w-full min-h-screen flex items-start justify-center px-4 py-10">
       <div className="w-full max-w-lg border rounded-lg p-6 shadow-sm bg-card">
         <h1 className="text-3xl font-bold text-center mb-6">
           Login to Your Account
