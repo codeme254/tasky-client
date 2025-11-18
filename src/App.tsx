@@ -4,6 +4,7 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AllTasks from "./pages/AllTasks";
+import CompletedTasks from "./pages/CompletedTasks";
 import Protected from "./components/Protected";
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
           element={
             <Protected>
               <AllTasks />
+            </Protected>
+          }
+        />
+        <Route
+          path="/tasks/completed"
+          element={
+            <Protected>
+              <CompletedTasks />
             </Protected>
           }
         />
