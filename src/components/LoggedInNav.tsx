@@ -12,6 +12,9 @@ function LoggedInNav() {
           All tasks
         </Link>
         <Link to="/tasks" className="font-bold text-base">
+          Completed tasks
+        </Link>
+        <Link to="/tasks" className="font-bold text-base">
           New task
         </Link>
         <Link to="/tasks" className="font-bold text-base">
