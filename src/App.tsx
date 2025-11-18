@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AllTasks from "./pages/AllTasks";
 import CompletedTasks from "./pages/CompletedTasks";
+import Trash from "./pages/Trash";
 import Protected from "./components/Protected";
 function App() {
   return (
@@ -27,6 +28,14 @@ function App() {
           element={
             <Protected>
               <CompletedTasks />
+            </Protected>
+          }
+        />
+        <Route
+          path="/tasks/trash"
+          element={
+            <Protected>
+              <Trash />
             </Protected>
           }
         />
