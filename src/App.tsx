@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import AllTasks from "./pages/AllTasks";
 import CompletedTasks from "./pages/CompletedTasks";
 import Trash from "./pages/Trash";
+import NewTask from "./pages/NewTask";
 import Protected from "./components/Protected";
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
           element={
             <Protected>
               <Trash />
+            </Protected>
+          }
+        />
+        <Route
+          path="/tasks/new"
+          element={
+            <Protected>
+              <NewTask />
             </Protected>
           }
         />

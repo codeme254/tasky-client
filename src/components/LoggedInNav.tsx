@@ -14,7 +14,7 @@ function LoggedInNav() {
         <Link to="/tasks/completed" className="font-bold text-base">
           Completed tasks
         </Link>
-        <Link to="/tasks" className="font-bold text-base">
+        <Link to="/tasks/new" className="font-bold text-base">
           New task
         </Link>
         <Link to="/tasks/trash" className="font-bold text-base">
