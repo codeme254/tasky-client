@@ -20,7 +20,7 @@ function LoggedInNav() {
         <Link to="/tasks/trash" className="font-bold text-base">
           Trash
         </Link>
-        <Link to="/tasks" className="font-bold text-base">
+        <Link to="/profile" className="font-bold text-base">
           Profile
         </Link>
         <p>Howdy {user.username}</p>
