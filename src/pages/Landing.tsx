@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImg from "../assets/landing-img.png";
+import useUser from "@/store/user";
+import { useEffect } from "react";
 
 function Landing() {
+  const { user } = useUser();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate("/tasks");
+    }
+  });
   return (
     <section className="w-full min-h-[80vh] flex items-center">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-6 py-20">
