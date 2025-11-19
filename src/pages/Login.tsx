@@ -16,19 +16,19 @@ interface LoginDetails {
 }
 
 function Login() {
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState("")
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   const { setUser } = useUser();
   const navigate = useNavigate();
 
   const { isPending, mutate } = useMutation({
     mutationKey: ["login"],
-    mutationFn: async function(loginDetails: LoginDetails) {
+    mutationFn: async function (loginDetails: LoginDetails) {
       const response = await api.post("/auth/login", loginDetails);
       return response.data;
     },
-    onError: function(error) {
+    onError: function (error) {
       if (axios.isAxiosError(error)) {
         setLoginError(
           error.response?.data.message ||
@@ -39,18 +39,18 @@ function Login() {
         setLoginError(error.message);
       }
     },
-    onSuccess: function(data) {
+    onSuccess: function (data) {
       setUser(data);
-      navigate("/tasks")
-    }
-  })
-
+      navigate("/tasks");
+    },
+  });
 
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     const loginDetails = {
-      identifier, password
-    }
+      identifier,
+      password,
+    };
     mutate(loginDetails);
   }
   return (
@@ -61,19 +61,33 @@ function Login() {
         </h1>
 
         <form className="space-y-4" onSubmit={handleLogin}>
-          { loginError && <Alert className="bg-red-500">
-            <AlertTitle className="text-white">{loginError}</AlertTitle>
-          </Alert> }
+          {loginError && (
+            <Alert className="bg-red-500">
+              <AlertTitle className="text-white">{loginError}</AlertTitle>
+            </Alert>
+          )}
           {/* Username */}
           <div className="flex flex-col space-y-1">
             <Label htmlFor="username">Username or Email Address</Label>
-            <Input id="username" type="text" placeholder="john_doe" value={identifier} onChange={(e) => setIdentifier(e.target.value)} />
+            <Input
+              id="username"
+              type="text"
+              placeholder="john_doe"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+            />
           </div>
 
           {/* Password */}
           <div className="flex flex-col space-y-1">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Input
+              id="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
 
           {/* Register Button */}
@@ -83,7 +97,7 @@ function Login() {
             size="lg"
             disabled={isPending}
           >
-            { isPending && <Spinner /> }
+            {isPending && <Spinner />}
             Login
           </Button>
 
