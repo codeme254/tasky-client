@@ -4,6 +4,8 @@ import axios from "axios";
 import api from "@/lib/axios";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
+import Empty from "@/components/Empty";
+import { Link } from "react-router-dom";
 
 interface Task {
   id: string;
@@ -45,6 +47,13 @@ function AllTasks() {
   }
   return (
     <div className="p-5 flex flex-wrap justify-center gap-5">
+      {data && data.length <= 0 && (
+        <Empty message="You don't have any tasks">
+          <Button asChild variant="default" size="lg">
+            <Link to="/tasks/new">Create task</Link>
+          </Button>
+        </Empty>
+      )}
       {data &&
         data.map(function (task) {
           return (

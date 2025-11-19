@@ -6,6 +6,11 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import api from "@/lib/axios";
+import axios from "axios";
+import { toast } from "sonner";
+import { Spinner } from "./ui/spinner";
 
 interface TaskCardProps {
   title: string;
@@ -15,6 +20,31 @@ interface TaskCardProps {
 }
 
 function TaskCard({ title, description, isCompleted, id }: TaskCardProps) {
+  const queryClient = useQueryClient();
+  const { isPending, mutate } = useMutation({
+    mutationKey: ["Delete task"],
+    mutationFn: async function () {
+      const response = await api.delete(`/tasks/${id}`);
+      return response.data;
+    },
+    onError: function (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data.message || "An unexpected error occurred",
+        );
+      } else {
+        toast.error("An unexpected error occurred");
+      }
+    },
+    onSuccess: function () {
+      queryClient.invalidateQueries({ queryKey: ["get-tasks"] });
+      toast.success("Task moved to trash", { position: "top-center" });
+    },
+  });
+
+  function handleDelete() {
+    mutate();
+  }
   return (
     <Card className="w-full max-w-md shadow-md rounded-2xl p-4 transition-all hover:shadow-lg hover:scale-[1.01]">
       <CardHeader>
@@ -45,7 +75,10 @@ function TaskCard({ title, description, isCompleted, id }: TaskCardProps) {
         <Button
           variant="destructive"
           className="rounded-xl transition-all hover:brightness-90 hover:scale-[1.02]"
+          disabled={isPending}
+          onClick={handleDelete}
         >
+          {isPending && <Spinner />}
           Delete
         </Button>
       </CardFooter>
