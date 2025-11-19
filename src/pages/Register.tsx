@@ -31,7 +31,7 @@ function Register() {
   const { isPending, mutate } = useMutation({
     mutationKey: ["register"],
     mutationFn: async function (user: User) {
-      await api.post("/auth/registe", user);
+      await api.post("/auth/register", user);
     },
     onSuccess: function () {
       navigate("/login");
